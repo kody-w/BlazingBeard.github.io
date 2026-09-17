@@ -84,7 +84,9 @@ test('all inline executable scripts compile; data is local and versioned', () =>
   assert.equal(quest.reviewed, '2026-09-16');
   assert.match(documentHtml, /<time datetime="2026-09-16">/);
   assert.match(documentHtml, /Sources.*availability/);
-  assert.match(documentHtml, /unreleased working changes/);
+  assert.match(documentHtml, /62273145f53ce6afcd9c667af76bb0cde0fe4b3f/);
+  assert.match(documentHtml, /reviewed revision 6227314/);
+  assert.doesNotMatch(documentHtml, /unreleased working changes|linked base revision/);
   assert.doesNotMatch(html, /<script\b[^>]*\bsrc\s*=|<link\b[^>]*\brel=["']stylesheet|@import|<iframe\b/i);
   assert.doesNotMatch(executable[0][2], /\b(?:fetch|XMLHttpRequest|WebSocket)\s*\(/);
 });
