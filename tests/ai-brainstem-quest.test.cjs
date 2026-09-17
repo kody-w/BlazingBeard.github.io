@@ -84,6 +84,8 @@ test('all inline executable scripts compile; data is local and versioned', () =>
   assert.equal(quest.reviewed, '2026-09-16');
   assert.match(documentHtml, /<time datetime="2026-09-16">/);
   assert.match(documentHtml, /Sources.*availability/);
+  assert.match(documentHtml, /8b40f77715150e804c0d77903ea4a51bb1b05481/);
+  assert.match(documentHtml, /Desktop onboarding source, revision 8b40f77/);
   assert.match(documentHtml, /ee6b9f40187692e72981054cb1438603061dccbf/);
   assert.match(documentHtml, /reviewed revision ee6b9f4/);
   assert.doesNotMatch(documentHtml, /unreleased working changes|linked base revision/);
