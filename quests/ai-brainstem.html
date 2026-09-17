@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Learn AI Brainstem by forming a team for one meaningful project. Copy conversational prompts, check visible evidence, and keep durable work through collaboration, recovery, and export.">
+<meta name="quest-version" content="1.0.0">
+<meta name="quest-reviewed" content="2026-09-16">
+<title>AI Brainstem — Training Quest</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  :root {
+    color-scheme: light;
+    --bg: #eaecf0; --surface: #f7f8fa; --text: #24292f; --muted: #57606a;
+    --border: #c5ccd6; --blue: #0969da; --green: #1a7f37; --amber: #865900;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; color: var(--text); background: linear-gradient(135deg, #dfe2e6, var(--bg));
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif; line-height: 1.5;
+  }
+  button, textarea { font: inherit; }
+  button, a { -webkit-tap-highlight-color: transparent; }
+  button { cursor: pointer; }
+  button:disabled { cursor: default; opacity: .5; }
+  a { color: var(--blue); text-underline-offset: 3px; }
+  :focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+  [hidden] { display: none !important; }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+  }
+  .skip-link {
+    position: fixed; left: 12px; top: -80px; padding: 10px 16px;
+    background: white; border-radius: 8px; z-index: 100;
+  }
+  .skip-link:focus { top: 12px; }
+  .top-bar {
+    position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 24px;
+    padding: 12px 24px; background: rgba(234, 236, 240, .96); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .quest-nav { display: flex; align-items: center; gap: 14px; font-size: 13px; }
+  .quest-nav strong { color: var(--blue); white-space: nowrap; }
+  .progress-wrap { flex: 1; max-width: 430px; margin-inline: auto; min-width: 140px; }
+  .progress-text { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 5px; font-size: 12px; color: var(--muted); }
+  .progress-track { height: 8px; background: var(--border); border-radius: 8px; overflow: hidden; }
+  .progress-fill { width: 0; height: 100%; background: linear-gradient(90deg, var(--blue), var(--green)); transition: width .4s ease; }
+  .button {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    min-height: 44px; padding: 9px 14px; border: 1px solid var(--border);
+    border-radius: 9px; background: var(--surface); color: var(--text); font-weight: 600;
+  }
+  .button:hover:not(:disabled) { border-color: var(--blue); color: var(--blue); }
+  .button.primary { background: var(--blue); border-color: var(--blue); color: white; }
+  .button.primary:hover { background: #0757b5; color: white; }
+  .reset-button { font-size: 12px; white-space: nowrap; background: transparent; }
+  main { max-width: 1600px; margin: 0 auto; scroll-margin-top: 120px; }
+  .intro { padding: 26px 30px 12px; display: grid; grid-template-columns: 1fr auto; gap: 12px 32px; align-items: center; }
+  .eyebrow { margin: 0 0 4px; font-size: 12px; font-weight: 700; color: var(--blue); letter-spacing: 1.4px; text-transform: uppercase; }
+  h1 { margin: 0; font-size: clamp(24px, 3vw, 36px); letter-spacing: -.8px; line-height: 1.2; }
+  h1 span { font-weight: 400; color: var(--muted); }
+  .story { max-width: 870px; margin: 10px 0 0; font-size: 14px; color: var(--muted); }
+  .intro-actions { display: flex; flex-direction: column; align-items: center; gap: 9px; font-size: 12px; }
+  .how-to { grid-column: 1 / -1; margin: 0; font-size: 13px; color: var(--muted); }
+  .legend { display: flex; flex-wrap: wrap; gap: 18px; padding: 0 30px; font-size: 12px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border); }
+  .legend-dot.next { background: var(--blue); }
+  .legend-dot.verified { background: var(--green); }
+  .legend-dot.gated { background: var(--amber); }
+  .storage-notice, noscript { display: block; margin: 12px 30px; padding: 12px; border: 1px solid var(--amber); border-radius: 8px; background: #fff8e7; font-size: 13px; }
+  .quest-map {
+    position: relative; height: max(490px, calc(100svh - 305px)); margin: 0 12px;
+    background-image: radial-gradient(rgba(87, 96, 106, .12) .75px, transparent .75px);
+    background-size: 24px 24px;
+  }
+  .path-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .route { fill: none; stroke: var(--border); stroke-width: 2; stroke-dasharray: 5 7; }
+  .route.verified { stroke: var(--green); stroke-dasharray: none; opacity: .65; stroke-width: 3; }
+  .route.gated { stroke: var(--amber); opacity: .65; }
+  .route.next { stroke: var(--blue); stroke-width: 2.5; animation: path-flow 1.5s linear infinite; }
+  .phase-label {
+    position: absolute; top: 13px; width: 16.666%; margin: 0; padding: 0 5px;
+    text-align: center; font-size: 11px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .phase-divider { position: absolute; top: 42px; bottom: 24px; width: 1px; background: linear-gradient(transparent, var(--border) 20%, var(--border) 80%, transparent); }
+  .node {
+    position: absolute; width: 56px; height: 56px; padding: 0; border: 0; background: none;
+    border-radius: 50%; transform: translate(-50%, -50%); z-index: 2;
+    transition: transform .25s ease;
+  }
+  .node:hover { transform: translate(-50%, -50%) scale(1.08); }
+  .node .ring { position: absolute; inset: -5px; border: 2px solid var(--border); border-radius: 50%; }
+  .node .inner, .m-node {
+    display: flex; align-items: center; justify-content: center; width: 56px; height: 56px;
+    border: 2px solid var(--border); border-radius: 50%; background: #f0f1f3; font-size: 23px;
+    transition: background .25s, border-color .25s;
+  }
+  .node .label { position: absolute; top: 69px; left: 50%; transform: translateX(-50%); width: 138px; font-size: 12px; line-height: 1.3; font-weight: 600; color: var(--muted); }
+  .node .state-icon { position: absolute; right: -6px; top: -7px; min-width: 22px; height: 22px; border-radius: 11px; background: var(--surface); border: 1px solid var(--border); font-size: 11px; line-height: 20px; font-weight: 700; }
+  .node.next .ring { border-color: var(--blue); animation: pulse-ring 2s infinite; }
+  .node.next .inner, .m-item.next .m-node { border-color: var(--blue); background: #e2eeff; }
+  .node.next .label { color: var(--blue); }
+  .node.verified .ring, .node.verified .inner, .m-item.verified .m-node { border-color: var(--green); background: #e4f1e7; }
+  .node.gated .ring, .node.gated .inner, .m-item.gated .m-node { border-color: var(--amber); background: #fff3d6; }
+  .node.verified .label, .m-item.verified .m-state { color: var(--green); }
+  .node.gated .label, .m-item.gated .m-state { color: var(--amber); }
+  .node.verified .state-icon { color: white; background: var(--green); border-color: var(--green); }
+  .node.gated .state-icon { color: white; background: var(--amber); border-color: var(--amber); }
+  #mobileList { display: none; }
+  .sources { margin: 8px 30px 18px; padding: 13px 16px; border: 1px solid var(--border); border-radius: 10px; background: rgba(247, 248, 250, .65); font-size: 13px; scroll-margin-top: 120px; }
+  summary { cursor: pointer; font-weight: 600; }
+  .sources p { max-width: 1000px; }
+  .sources ul { padding-left: 20px; }
+  .sources li { margin: 7px 0; }
+  .site-footer { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 0 30px 24px; font-size: 12px; color: var(--muted); }
+  .modal-open { overflow: hidden; }
+  dialog { color: var(--text); background: var(--surface); }
+  dialog::backdrop { background: rgba(24, 32, 44, .35); backdrop-filter: blur(2px); }
+  .panel {
+    position: fixed; inset: 0 0 0 auto; margin: 0; padding: 0; width: 520px; max-width: 94vw;
+    height: 100dvh; max-height: 100dvh; border: 0; border-left: 1px solid var(--border);
+    box-shadow: -6px 0 36px rgba(0, 0, 0, .15);
+  }
+  .panel[open] { display: flex; flex-direction: column; animation: panel-enter .2s ease-out; }
+  .panel-header { display: flex; gap: 12px; align-items: flex-start; padding: 21px 22px 17px; border-bottom: 1px solid var(--border); }
+  .panel-emoji { font-size: 30px; line-height: 1.2; }
+  .panel-heading { flex: 1; min-width: 0; }
+  .panel-heading h2 { margin: 2px 0 6px; font-size: 21px; line-height: 1.2; }
+  .panel-meta { font-size: 12px; color: var(--muted); margin: 0; }
+  .close-button { flex-shrink: 0; padding: 6px; width: 44px; height: 44px; border: 0; border-radius: 8px; background: transparent; color: var(--muted); font-size: 24px; line-height: 1; }
+  .close-button:hover { background: #e4e6ea; color: var(--text); }
+  .panel-body { padding: 20px 22px; overflow-y: auto; overscroll-behavior: contain; flex: 1; min-height: 0; font-size: 14px; }
+  .panel-body > :first-child { margin-top: 0; }
+  .panel-body h3 { margin: 20px 0 8px; font-size: 14px; }
+  .panel-body p { margin: 10px 0; }
+  .context-label { color: var(--blue); font-size: 12px; font-weight: 700; }
+  .prompt-card { margin: 18px 0; padding: 13px; border: 1px solid #aabbd1; background: #e8edf5; border-radius: 10px; }
+  .prompt-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+  .prompt-heading label { font-weight: 700; font-size: 13px; }
+  .copy-button { font-size: 12px; flex-shrink: 0; }
+  .prompt-text { display: block; width: 100%; min-height: 155px; resize: vertical; border: 1px solid var(--border); border-radius: 6px; padding: 10px; background: #f8faff; color: var(--text); font-size: 14px; line-height: 1.6; }
+  .copy-status { font-size: 12px; color: var(--muted); min-height: 18px; margin-bottom: 0 !important; }
+  .steps, .outcomes { padding-left: 22px; margin: 8px 0 16px; }
+  .steps li, .outcomes li { margin: 8px 0; padding-left: 3px; }
+  .boundary { border-left: 3px solid var(--amber); padding: 10px 13px; background: #fff8e7; border-radius: 0 8px 8px 0; }
+  .boundary h3 { margin-top: 0; color: #714a00; }
+  .boundary p { margin-bottom: 0; }
+  .help { margin-top: 16px; color: var(--muted); font-size: 13px; }
+  .panel-footer { padding: 13px 22px 17px; border-top: 1px solid var(--border); background: var(--surface); }
+  .review-note { font-size: 12px; color: var(--muted); margin: 0 0 9px; }
+  .outcome-buttons, .step-navigation { display: flex; gap: 8px; }
+  .outcome-buttons .button { flex: 1; font-size: 12px; padding-inline: 8px; }
+  .outcome-buttons [data-outcome="verified"][aria-pressed="true"] { color: var(--green); border-color: var(--green); background: #e4f1e7; }
+  .outcome-buttons [data-outcome="gated"][aria-pressed="true"] { color: #714a00; border-color: var(--amber); background: #fff3d6; }
+  .step-navigation { justify-content: space-between; margin-top: 10px; }
+  .step-navigation .button { font-size: 12px; }
+  .completion { padding: 28px; border: 2px solid var(--green); border-radius: 18px; width: 630px; max-width: 94vw; max-height: 92dvh; overflow-y: auto; text-align: center; box-shadow: 0 12px 48px rgba(0, 0, 0, .2); }
+  .completion .close-button { position: absolute; right: 10px; top: 10px; }
+  .completion h2 { font-size: 27px; margin: 10px 30px; }
+  .completion p { color: var(--muted); font-size: 14px; }
+  .badge-canvas { display: block; width: 100%; height: auto; margin: 20px auto; border-radius: 12px; background: #0d1117; }
+  .badge-actions { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+  .share-fallback { margin-top: 16px; text-align: left; }
+  .share-fallback label { display: block; font-size: 13px; margin-bottom: 7px; }
+  .confetti-piece { position: fixed; top: -20px; width: 8px; height: 14px; z-index: 50; pointer-events: none; animation: confetti-fall 2.7s ease-in forwards; }
+  @keyframes path-flow { to { stroke-dashoffset: -24; } }
+  @keyframes pulse-ring { 0%, 100% { box-shadow: 0 0 14px #0969da25; } 50% { box-shadow: 0 0 27px #0969da55; } }
+  @keyframes panel-enter { from { transform: translateX(22px); opacity: .6; } to { transform: translateX(0); opacity: 1; } }
+  @keyframes panel-enter-mobile { from { transform: translateY(22px); opacity: .6; } to { transform: translateY(0); opacity: 1; } }
+  @keyframes confetti-fall { to { transform: translate(var(--drift), 100dvh) rotate(540deg); opacity: 0; } }
+  @media (max-width: 960px) {
+    .top-bar { gap: 14px; padding: 10px 16px; flex-wrap: wrap; }
+    .quest-nav { flex: 1; }
+    .progress-wrap { order: 3; max-width: none; flex-basis: 100%; }
+    .progress-text { margin-bottom: 4px; }
+    .intro { padding: 24px 18px 14px; grid-template-columns: 1fr; }
+    .intro-actions { align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: 14px; }
+    .intro-actions a { align-self: center; }
+    h1 span { display: block; margin-top: 5px; font-size: 20px; letter-spacing: 0; }
+    .how-to { font-size: 13px; }
+    .legend { padding: 0 18px; gap: 12px; }
+    .quest-map { display: none; }
+    #mobileList { display: block; padding: 12px 18px 26px; }
+    .m-phase h2 { color: var(--muted); font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; margin: 24px 0 9px; }
+    .m-phase ol { padding: 0; margin: 0; list-style: none; }
+    .m-phase li { position: relative; }
+    .m-phase li:not(:last-child)::before { content: ""; position: absolute; width: 2px; background: var(--border); top: 30px; bottom: -30px; left: 27px; }
+    .m-item { display: flex; align-items: center; gap: 15px; width: 100%; padding: 12px 0; border: 0; border-radius: 8px; background: none; text-align: left; color: var(--text); }
+    .m-node { position: relative; z-index: 1; flex-shrink: 0; }
+    .m-text { display: flex; flex: 1; flex-direction: column; gap: 4px; min-width: 0; }
+    .m-title { font-size: 15px; font-weight: 600; }
+    .m-state { color: var(--muted); font-size: 12px; }
+    .m-arrow { color: var(--muted); padding-right: 5px; }
+    .sources { margin: 0 18px 18px; }
+    .site-footer { padding: 0 18px 26px; }
+    .storage-notice, noscript { margin-inline: 18px; }
+  }
+  @media (max-width: 600px) {
+    .quest-nav { gap: 10px; font-size: 12px; }
+    .reset-button { padding: 7px 10px; }
+    .panel { inset: auto 0 0; width: 100%; max-width: 100%; height: 91dvh; max-height: 91dvh; border-left: 0; border-radius: 16px 16px 0 0; }
+    .panel[open] { animation-name: panel-enter-mobile; }
+    .panel-header { padding: 17px 16px 12px; }
+    .panel-heading h2 { font-size: 19px; }
+    .panel-body { padding: 16px; }
+    .panel-footer { padding: 12px 16px max(12px, env(safe-area-inset-bottom)); }
+    .panel-emoji { font-size: 26px; }
+    .completion { padding: 28px 17px 20px; }
+    .completion h2 { font-size: 23px; }
+    .prompt-heading { align-items: flex-start; }
+    .prompt-heading label { padding-top: 7px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#mainContent">Skip to the quest</a>
+<header class="top-bar">
+  <nav class="quest-nav" aria-label="Quest navigation">
+    <a href="../index.html">← All quests</a>
+    <strong>AI Brainstem</strong>
+  </nav>
+  <div class="progress-wrap">
+    <div class="progress-text"><span id="progressLabel">0 of 24 reviewed</span><span id="progressDetail">Your progress stays in this browser</span></div>
+    <div class="progress-track" id="questProgress" role="progressbar" aria-labelledby="progressLabel" aria-valuemin="0" aria-valuemax="24" aria-valuenow="0">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+  <button class="button reset-button" id="resetProgress" type="button">Reset progress</button>
+</header>
+<main id="mainContent" tabindex="-1" aria-labelledby="questTitle">
+  <section class="intro" aria-labelledby="questTitle">
+    <div>
+      <p class="eyebrow">One team · one project · lasting work</p>
+      <h1 id="questTitle">AI Brainstem <span>— Training Quest</span></h1>
+      <p class="story">Plan a fictional <strong>Neighborhood Book Swap</strong>: a two-hour event, a $200 project budget, a volunteer plan, and a welcoming invitation. Ask AI Brainstem to form a team. Watch the work organize itself, survive a cleared chat, and become a verified portable backup. Drafts only—no real bookings, purchases, outreach, or personal details.</p>
+    </div>
+    <div class="intro-actions">
+      <button class="button primary" id="continueQuest" type="button">Start the quest →</button>
+      <a href="#sourceNote">Version &amp; supported states</a>
+    </div>
+    <p class="how-to"><strong>Open a checkpoint → copy its prompt → paste into the desktop app → check the visible result.</strong> This page never controls the app. Choose “Gate recorded” when the app shows a blocker or missing capability; do not pretend it ran. Every checkpoint is open for preview.</p>
+  </section>
+  <div class="legend" aria-label="Map legend">
+    <span><i class="legend-dot next" aria-hidden="true"></i>Next checkpoint</span>
+    <span><i class="legend-dot verified" aria-hidden="true"></i>✓ Outcome verified</span>
+    <span><i class="legend-dot gated" aria-hidden="true"></i>! Gate recorded</span>
+  </div>
+  <p class="storage-notice" id="storageNotice" role="status" hidden></p>
+  <noscript>Enable JavaScript in your browser to open the checkpoints and save quest progress. No account or connection to AI Brainstem is made by this page.</noscript>
+  <section class="quest-map" id="questMap" aria-label="Desktop checkpoint map">
+    <svg class="path-svg" id="pathSvg" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true"></svg>
+  </section>
+  <section id="mobileList" aria-label="Mobile checkpoint list"></section>
+  <details class="sources" id="sourceNote">
+    <summary>Sources &amp; availability · Quest v1.0.0 · Reviewed <time datetime="2026-09-16">16 September 2026</time></summary>
+    <p><strong>This is a dated training snapshot, not a release or live-feature certification.</strong> Sources: AI Brainstem Desktop 0.1.0 onboarding; the AI Brainstem runtime README sections on identity, semantic UI autopilot, private work, portability, and the Copilot SDK 1.0.13 supported-state matrix; the protected Work Organization and semantic UI skills. Runtime documentation includes unreleased working changes beyond the linked base revision.</p>
+    <ul>
+      <li><a href="https://github.com/kody-w/rapp-brainstem-desktop/blob/956eab3ae9d2d5b97499941f9bc77cc88d9729fb/README.md" target="_blank" rel="noopener noreferrer">Desktop onboarding source, revision 956eab3</a>. This snapshot targets Apple silicon Macs. A compatible, trusted distributable is required; the existence of a source repository is not an installer guarantee.</li>
+      <li><a href="https://github.com/kody-w/rapp-brainstem-skills/blob/a753afb2ab6d0a9c27cc8ad88c76c30843fd6fa6/README.md" target="_blank" rel="noopener noreferrer">Runtime source, base revision a753afb</a>. Newer workspace/SDK behavior here reflects the reviewed working snapshot, not necessarily the app you have installed.</li>
+      <li><strong>Available</strong> means documented implementation. <strong>Build/provider-dependent</strong> means inspect Work and actual evidence. <strong>Gated/unavailable</strong> means stop that action and record the reason. Offline adapter checks do not establish real provider compaction, tool search, file capture, or citation behavior.</li>
+      <li>SDK-neutral mapping and immutable successor generations preserve workspace authority; they are not a promise that every execution adapter or migration is available. Canvases, safe App rendering, destructive rewind, and lawful restore/hatch must not be simulated.</li>
+    </ul>
+    <p>When a required capability is missing, retain the proposed work and its blocker, use “Gate recorded,” and preview dependent lessons without inventing twins, evidence, or results. Revisit after an approved app update. The completion badge records learning and observed gates, not certification that every runtime feature executed.</p>
+    <p>Quest progress is stored separately in this browser. Reset affects only this quest; it never clears AI Brainstem work. Sharing a badge is optional and includes no chat, project files, personal identity, or workspace addresses.</p>
+  </details>
+</main>
+<footer class="site-footer">
+  <span>AI Brainstem · Conversation and visible UI, from arrival to export.</span>
+  <a href="rapp-brainstem.html">Historical quest — preserved, not the current onboarding</a>
+</footer>
+<div class="sr-only" id="announcer" role="status" aria-live="polite" aria-atomic="true"></div>
+
+<dialog class="panel" id="checkpointPanel" aria-modal="true" aria-labelledby="panelTitle" aria-describedby="panelMeta">
+  <header class="panel-header">
+    <span class="panel-emoji" id="panelEmoji" aria-hidden="true"></span>
+    <div class="panel-heading">
+      <p class="panel-meta" id="panelMeta"></p>
+      <h2 id="panelTitle" tabindex="-1"></h2>
+    </div>
+    <button class="close-button" id="closePanel" type="button" aria-label="Close checkpoint">×</button>
+  </header>
+  <div class="panel-body" id="panelBody">
+    <p class="context-label" id="panelContext"></p>
+    <p id="panelIntro"></p>
+    <div class="prompt-card">
+      <div class="prompt-heading">
+        <label for="promptText">Your conversational prompt</label>
+        <button class="button copy-button" id="copyPrompt" type="button">Copy prompt</button>
+      </div>
+      <textarea class="prompt-text" id="promptText" rows="7" readonly spellcheck="false" aria-describedby="copyStatus"></textarea>
+      <p class="copy-status" id="copyStatus">Paste into AI Brainstem when the visible steps below say to send it.</p>
+    </div>
+    <h3>Visible actions</h3>
+    <ol class="steps" id="panelActions"></ol>
+    <h3>What to confirm</h3>
+    <ul class="outcomes" id="panelOutcomes"></ul>
+    <aside class="boundary" aria-labelledby="boundaryTitle">
+      <h3 id="boundaryTitle">Supported state &amp; limits</h3>
+      <p id="panelBoundary"></p>
+    </aside>
+    <details class="help" id="panelHelp">
+      <summary>If the result is missing</summary>
+      <p id="panelHelpText"></p>
+    </details>
+  </div>
+  <footer class="panel-footer">
+    <p class="review-note">Mark only what you observed. A gate is not a successful execution. Select the same outcome again to undo.</p>
+    <div class="outcome-buttons" role="group" aria-label="Record checkpoint outcome">
+      <button class="button" type="button" data-outcome="verified" aria-pressed="false">✓ Outcome verified</button>
+      <button class="button" type="button" data-outcome="gated" aria-pressed="false">! Gate recorded</button>
+    </div>
+    <nav class="step-navigation" aria-label="Checkpoint navigation">
+      <button class="button" id="previousCheckpoint" type="button">← Previous</button>
+      <button class="button primary" id="nextCheckpoint" type="button">Next →</button>
+    </nav>
+  </footer>
+</dialog>
+
+<dialog class="completion" id="completionDialog" aria-modal="true" aria-labelledby="completionTitle" aria-describedby="completionStats">
+  <button class="close-button" id="closeCompletion" type="button" aria-label="Close completion badge">×</button>
+  <h2 id="completionTitle" tabindex="-1">🏆 Quest reviewed!</h2>
+  <p id="completionStats"></p>
+  <p>You reviewed how to form a team, keep evidence, and respect limits. Any project work stays in AI Brainstem; this badge shares only your quest summary, with verified outcomes and gates kept separate.</p>
+  <canvas class="badge-canvas" id="badgeCanvas" width="720" height="380" role="img" aria-label="AI Brainstem training quest completion badge">AI Brainstem Training Quest reviewed. The accessible completion summary appears above this badge.</canvas>
+  <div class="badge-actions">
+    <button class="button" id="downloadBadge" type="button">Download badge</button>
+    <button class="button primary" id="shareBadge" type="button">Share summary</button>
+  </div>
+  <p id="badgeStatus" role="status" aria-live="polite"></p>
+  <div class="share-fallback" id="shareFallback" hidden>
+    <label for="shareText">Select and copy this summary with your browser’s Copy action:</label>
+    <textarea class="prompt-text" id="shareText" rows="4" readonly></textarea>
+  </div>
+</dialog>
+
+<script type="application/json" id="questData">
+{
+  "version": "1.0.0",
+  "reviewed": "2026-09-16",
+  "phases": ["Meet your crew", "Start the project", "Teach the team", "Keep & find", "Work within limits", "Adapt & carry on"],
+  "checkpoints": [
+    {
+      "id": "desktop-wizard",
+      "phase": 1,
+      "emoji": "🥚",
+      "title": "Open the app & sign in",
+      "label": "Open & sign in",
+      "time": "4 min",
+      "context": "Start in the AI Brainstem desktop app",
+      "intro": "Install a trusted, compatible AI Brainstem desktop app build, then open it. The app includes its runtime and becomes your chat window. Already installed? Just open AI Brainstem again. The reviewed desktop build targets Apple silicon Macs; other devices or a trusted public download may be unavailable.",
+      "prompt": "Hello AI Brainstem. Help me plan a fictional Neighborhood Book Swap: a welcoming two-hour event, a $200 project budget, a volunteer plan, and a one-page invitation. Keep everything private and draft-only. Before we begin, explain what this build can actually do and list any blockers. Do not book, buy, send, or publish anything.",
+      "actions": [
+        "Open the packaged app supplied through your trusted app distributor. On a supported Mac, place AI Brainstem in Applications and open it. Do not bypass device protections.",
+        "In the wizard choose Sign in with GitHub, complete the displayed device-code confirmation on GitHub, and return to the app. Choose only permissions you understand and need.",
+        "Wait for the app’s chat and connected status. Check that your GitHub account has Copilot access, then paste and send the prompt."
+      ],
+      "outcomes": [
+        "The desktop chat opens with AI Brainstem selected and a connected sign-in state.",
+        "You receive a project-specific reply or a visible access/build blocker—not an invented successful setup."
+      ],
+      "boundary": "A source repository is not a packaged installer. If no trusted compatible build is available, or the wizard reports missing Copilot access, record the gate and pause app exercises here. Do not substitute a different setup path. This quest page does not install, authenticate, or connect to the app.",
+      "help": "Use the wizard’s visible retry or account choices. If access or installation remains blocked, keep that exact visible reason; preview later checkpoints without claiming their outcomes."
+    },
+    {
+      "id": "form-team",
+      "phase": 1,
+      "emoji": "👥",
+      "title": "Ask for a named team",
+      "label": "Form your team",
+      "time": "3 min",
+      "context": "Select AI Brainstem in the header",
+      "intro": "AI Brainstem is the fixed main coordinator and fallback. Named child twins are persistent individuals, not disposable labels for a single answer. Give two of them useful roles in the same Book Swap project.",
+      "prompt": "AI Brainstem, form a Book Swap team with two named child twins: Scout, who considers access and venue requirements, and Maker, who drafts the volunteer plan and invitation. Keep yourself as the main coordinator named AI Brainstem. If these twins already exist, identify them rather than overwriting them. Create them only through your supported capabilities, and report a gate if creation is unavailable.",
+      "actions": [
+        "Select AI Brainstem, then send the prompt.",
+        "Open the header’s twin selector and look for Scout and Maker.",
+        "Check the creation result before continuing; a paragraph describing imaginary teammates does not count."
+      ],
+      "outcomes": [
+        "Scout and Maker are separately selectable child twins, or the app explicitly reports why it cannot create them.",
+        "The original main option is still exactly AI Brainstem. It is not replaced or renamed."
+      ],
+      "boundary": "Child creation depends on the available creation capability. If it is absent, keep a proposed team in main’s work and mark the gate. Do not pretend role descriptions created real twins. Later twin exercises require actual entries in the selector.",
+      "help": "Ask for the current twin inventory. Reuse only the project twins you recognize; do not remove, replace, or overwrite unrelated twins."
+    },
+    {
+      "id": "rename-switch",
+      "phase": 1,
+      "emoji": "🏷️",
+      "title": "Rename a child & switch",
+      "label": "Rename & switch",
+      "time": "3 min",
+      "context": "Select Maker’s private chat",
+      "intro": "Make the role clearer: Maker becomes Planner. A display name can change; an established identity cannot. Switching selects a twin’s private conversation and capabilities, not another copy of the same shared chat.",
+      "prompt": "Call yourself Planner. Keep your existing identity, private workspace, and Book Swap planning role. Briefly introduce yourself as Planner and explain what you will contribute. Do not rename AI Brainstem or create a replacement twin.",
+      "actions": [
+        "Select Maker and send the prompt. If needed, use that child’s visible Edit and Save controls for the same name.",
+        "Select Scout, then Planner, then AI Brainstem using the header.",
+        "Notice that main has no available rename control and each selection updates its own chat and capabilities."
+      ],
+      "outcomes": [
+        "Planner replaces Maker’s display name without adding a third project twin.",
+        "The selected header and sender match the chosen twin; AI Brainstem remains the fixed main."
+      ],
+      "boundary": "Only children can be renamed. A missing or ambiguous child name is a gate, not permission to rename main. Switching cancels local response display; already accepted work can still finish in its original workspace.",
+      "help": "Use the selector rather than guessing a target. If names collide, identify the existing twins through their visible inventory and stable identities before changing anything."
+    },
+    {
+      "id": "twin-workspaces",
+      "phase": 1,
+      "emoji": "🔐",
+      "title": "Meet the durable workspace",
+      "label": "Identity & workspace",
+      "time": "3 min",
+      "context": "Select Planner, then open Work",
+      "intro": "Each twin owns a private RAPP workspace, with a sandbox for its working sessions. Its RAPP/1 identity is minted once from fresh randomness, never derived from its name. Names, conversations, and working files are not interchangeable with identity.",
+      "prompt": "Planner, use current workspace status to explain your private RAPP workspace and mint-once RAPPID. Tell me which Book Swap work belongs here, which belongs to a team organization, and what your sandbox does. Confirm that a rename keeps the same identity. Do not expose private device paths or share workspace contents.",
+      "actions": [
+        "Choose Planner, open Work, and inspect the owner shown for its private workspace.",
+        "Send the prompt and compare the owner and identity evidence with the existing twin, not with a newly invented identifier.",
+        "Keep identity details inside the app; there is no need to paste them into this quest."
+      ],
+      "outcomes": [
+        "Workspace status identifies Planner as the private owner and distinguishes its working session from durable work.",
+        "The explanation preserves the same mint-once identity through rename and reopening."
+      ],
+      "boundary": "The sandbox is a scoped working area, not a security guarantee for untrusted extensions. A missing or damaged established identity must block work, not silently mint a replacement. Deleting a twin is destructive; this lesson does not ask you to do that.",
+      "help": "If identity verification fails, retain the diagnostic and stop that workspace’s actions. A guessed identity or a recreated twin is not a repair."
+    },
+    {
+      "id": "root-organization",
+      "phase": 2,
+      "emoji": "🧭",
+      "title": "Give the project a home",
+      "label": "Main’s work home",
+      "time": "3 min",
+      "context": "Return to AI Brainstem’s private main chat",
+      "intro": "The fixed AI Brainstem owns a separately minted root RAPP work organization. It is the top-level manager of work, not a bucket that copies every child’s private contents. Start the Book Swap brief there before the team collaborates.",
+      "prompt": "In your root work organization, create the objective Neighborhood Book Swap. Add three proposed tasks: an accessible venue plan, a volunteer checklist, and a draft invitation. Record a proposed decision to stay within the fictional $200 project budget. Keep everything draft-only, with no real spending or outreach. Show the current owner, tasks, and verified work status.",
+      "actions": [
+        "Select AI Brainstem rather than a previous group, then send the prompt.",
+        "Open Work and select its root work organization.",
+        "Inspect the owner and task counts; ask for the task list if the compact panel only shows a summary."
+      ],
+      "outcomes": [
+        "Main’s root organization contains the Book Swap objective and three real proposed tasks.",
+        "The project-budget decision is proposed; it is not a spending or automation approval."
+      ],
+      "boundary": "Root organization identity is distinct from the main twin’s identity. The root catalog holds typed references and counts, not copies of private work. The fictional project budget is unrelated to an approved AI-credit limit.",
+      "help": "If the reply only describes a plan, ask it to use Work to persist the objective and tasks. Confirm a fresh status result rather than trusting a promise to save later. If Work is unavailable, record the gate and retain the brief as a proposal."
+    },
+    {
+      "id": "mention-multichat",
+      "phase": 2,
+      "emoji": "💬",
+      "title": "Invite the team with @mentions",
+      "label": "Talk as a team",
+      "time": "4 min",
+      "context": "Start from AI Brainstem’s main chat",
+      "intro": "Bring Scout and Planner into one iMessage-style multichat. Each participant has a sender-labeled bubble. This participant set gets its own durable work organization; it does not merge the twins’ private histories.",
+      "prompt": "@Scout @Planner Let’s plan the fictional Neighborhood Book Swap together: a welcoming two-hour event, a $200 project budget, an accessible venue plan, a volunteer checklist, and a draft invitation. Scout, identify practical constraints. Planner, build on those constraints. AI Brainstem, coordinate and show this participant organization’s owners. Nothing should be booked, purchased, or sent.",
+      "actions": [
+        "Paste the prompt in main. Use the @ suggestion list to choose the actual Scout and Planner twins if a name is ambiguous.",
+        "Send once and watch the separate sender-labeled replies.",
+        "Open Work and inspect the participant organization’s owners. Later messages in this same team work can continue without repeating mentions."
+      ],
+      "outcomes": [
+        "AI Brainstem, Scout, and Planner reply as distinct participants rather than one unlabelled imitation of a team.",
+        "Work shows the selected participant set and its own durable organization."
+      ],
+      "boundary": "Participant identities, not names or ordering, select the organization. Renaming a member keeps that set; a different explicit set or replacement identity gets different work. Selecting a child directly returns to its private chat. Mentioning a name is not permission to reveal its private history.",
+      "help": "Choose from autocomplete rather than guessing duplicate names. If a required twin is unavailable, record the gate; do not claim that a single main reply is multichat."
+    },
+    {
+      "id": "work-panel",
+      "phase": 2,
+      "emoji": "📋",
+      "title": "Organize tasks, not just messages",
+      "label": "Use the Work panel",
+      "time": "4 min",
+      "context": "Keep the Book Swap participant work selected",
+      "intro": "Work is the project’s durable structure: objectives, tasks, decisions, routines, artifacts, and evidence. Conversation helps build that structure; it is not a substitute for it. The panel is compact, so use chat for the detailed lists.",
+      "prompt": "Organize our Book Swap participant work. Save its objective, the venue-plan task, volunteer-checklist task, and draft-invitation task. Record an access-first decision as proposed. Add a proposed review routine but leave timed activity disabled. List objectives, tasks, decisions, routines, and artifact references, with owners and blockers. Do not mark a task complete without saved evidence.",
+      "actions": [
+        "Open Work, choose the Book Swap participant organization, and select Open if needed.",
+        "Send the prompt. Check owners, status, open tasks, blockers, and approvals.",
+        "Use Review tasks / approvals when available; it prepares a visible message to review before sending."
+      ],
+      "outcomes": [
+        "The detailed work list and the panel’s counts describe the same selected team project.",
+        "Decisions remain proposed, the review routine is not authorized to wake, and tasks with no evidence stay open."
+      ],
+      "boundary": "A proposed decision is not an approval. Explicit work items can reconcile after turns, but arbitrary prose, a greeting, or an assistant’s confidence does not prove task completion. Changes must reconcile against verified current work; conflicts require a fresh read.",
+      "help": "Check which owner is selected before adding work. If a reply says it saved something but the work list does not show it, keep the task open and ask for the persistence result."
+    },
+    {
+      "id": "durable-evidence",
+      "phase": 2,
+      "emoji": "📝",
+      "title": "Make one useful deliverable",
+      "label": "Save real evidence",
+      "time": "4 min",
+      "context": "Continue in the Book Swap team organization",
+      "intro": "Now solve the project rather than collecting features. Make a concise plan and invitation. Completed results belong to their owning work organization; a reference to an artifact must identify something that actually exists.",
+      "prompt": "Produce our one-page Neighborhood Book Swap plan and draft invitation. Include step-free access, a two-hour schedule, volunteer roles, and a fictional cost breakdown within $200. Save the result as a work artifact if supported; otherwise retain it as durable response evidence and say that no file was created. Link actual evidence to the tasks and report completion only after persistence succeeds. Do not send the invitation.",
+      "actions": [
+        "Send the prompt and wait for the completed response, not just words appearing while it is still working.",
+        "Ask to list the current artifact or evidence references if they are not included in the response.",
+        "Check Work for completed draft tasks and remaining blockers. A draft invitation is not a sent invitation."
+      ],
+      "outcomes": [
+        "A usable plan and invitation exist as an actual artifact or explicitly identified durable response evidence.",
+        "Task updates point to saved evidence. A storage failure is visible as a failure, not a success receipt."
+      ],
+      "boundary": "Streaming text is provisional. The host saves accepted input and completed results privately before durable completion is reported. It must not invent artifact names, hashes, citations, or saved files. A plain response and a file artifact are different outcomes.",
+      "help": "If artifact creation is blocked, a verified saved response can still be useful evidence. Record the file-creation gate and keep the distinction visible."
+    },
+    {
+      "id": "hot-load-agents",
+      "phase": 3,
+      "emoji": "🧩",
+      "title": "Ask for a useful new agent",
+      "label": "Hot-load an agent",
+      "time": "4 min",
+      "context": "Select Planner’s private workspace",
+      "intro": "An agent is an executable capability the app can call. Create a tiny, harmless helper for this project and verify it is loaded. Hot-loading means a supported new capability can be available on the next message without reopening the app.",
+      "prompt": "Create and hot-load a small agent named BookSwapChecklist in your approved capabilities workspace. It should return a checklist for a welcoming two-hour book swap: access, volunteer roles, table labels, and a quiet reading corner. It must have no external side effects. Then invoke it once and show the actual tool result. If this build cannot create or load it with available permissions, report that gate instead.",
+      "actions": [
+        "Select Planner, send the prompt, and review any visible permission decision before accepting it.",
+        "Open Agents and find BookSwapChecklist in the selected twin’s inventory.",
+        "Compare the invocation evidence with the returned checklist; a made-up answer is not a tool call."
+      ],
+      "outcomes": [
+        "The new agent appears in Planner’s inventory and an actual invocation is recorded, or the loader/permission gate is explicit.",
+        "Other twins’ private capability inventories have not been silently changed."
+      ],
+      "boundary": "Creation requires a supported authoring capability and allowed permissions; conversation alone cannot make a missing tool real. Failed or quarantined capabilities are not loaded. Never broaden permissions just to earn a checkpoint.",
+      "help": "Use the inventory and tool evidence. If only a proposed agent was described, record the gate and leave implementation to a supported app capability."
+    },
+    {
+      "id": "hot-load-skills",
+      "phase": 3,
+      "emoji": "📚",
+      "title": "Teach a reusable review skill",
+      "label": "Hot-load a skill",
+      "time": "4 min",
+      "context": "Stay in Planner’s private workspace",
+      "intro": "A skill supplies reusable instructions; an agent supplies executable behavior. AI Brainstem loads both as discoverable capabilities. Teach a review habit rather than requesting the same checklist in every conversation.",
+      "prompt": "Create and hot-load a reusable skill named book-swap-review through your supported app capabilities. It should review a Book Swap draft for step-free access, clear volunteer ownership, the fictional $200 ceiling, and absence of personal details. Use it on this short draft: a two-hour event with labeled book tables and two volunteers. Report the actual skill invocation and its findings, or the precise creation/loading gate.",
+      "actions": [
+        "Send the prompt and inspect the current capability inventory for book-swap-review.",
+        "Look for a skill-used or tool-result indicator in the response, not just the words “I used it.”",
+        "Keep any loading problem visible; you do not need to restart the app for a supported hot-load."
+      ],
+      "outcomes": [
+        "The review skill is present and its actual use produces specific review findings, or the app reports it unavailable.",
+        "You can distinguish the reusable instructions from the executable agent created in the previous checkpoint."
+      ],
+      "boundary": "Skills remain subject to their declared permissions and the host’s policy. A broken or disallowed skill is not silently treated as available. Merely pasting a description does not install it.",
+      "help": "Ask which capability supplied the review and inspect the recorded invocation. If no authoring path or skill loader is available, mark the gate without pretending the review was skill-backed."
+    },
+    {
+      "id": "honest-unload",
+      "phase": 3,
+      "emoji": "🧹",
+      "title": "Unload means unavailable",
+      "label": "Verify honest unload",
+      "time": "3 min",
+      "context": "Use only Planner’s two exercise-created capabilities",
+      "intro": "Remove the two practice helpers and verify the next turn really loses them. Removing a capability must not leave a cached callable tool or stale native role behind. This is not an exercise in deleting twins or work.",
+      "prompt": "I removed the practice capabilities BookSwapChecklist and book-swap-review using the visible controls. Check your current inventory. Confirm they are unavailable on this next message and do not invoke or recreate them. You may reason about the Book Swap yourself, but clearly distinguish ordinary reasoning from an invocation. If a stale tool or role remains, report a gate instead of claiming a successful unload.",
+      "actions": [
+        "In Planner’s Agents panel, optionally Export the two practice helpers you created.",
+        "Choose Delete only for BookSwapChecklist and book-swap-review, if enabled, and confirm those exact items. Do not delete twins or protected helpers.",
+        "Send the prompt in the same chat without reopening the app, then inspect the inventory and invocation evidence."
+      ],
+      "outcomes": [
+        "Both removed helpers are absent and cannot run on the next message, or the app honestly blocks the stale state.",
+        "Existing Book Swap evidence remains. An ordinary answer is not mislabelled as a removed tool’s output."
+      ],
+      "boundary": "Delete is real removal, not a reversible pause. Protected core capabilities cannot be deleted. Native role definitions that still reference unloaded tools must be narrowed or gate execution, never silently retain the old authority.",
+      "help": "If you did not create these exact helpers, do not delete similarly named existing work. If removal is disabled or the helper is still callable, record the gate and stop that test."
+    },
+    {
+      "id": "semantic-autopilot",
+      "phase": 3,
+      "emoji": "👆",
+      "title": "Watch the visible cursor",
+      "label": "Visible UI autopilot",
+      "time": "3 min",
+      "context": "Select AI Brainstem",
+      "intro": "Semantic autopilot operates a small allowlist of the app’s visible controls. Watch its cursor and labels, then use Stop. This is UI assistance, not a general ability to operate your device.",
+      "prompt": "Use your visible semantic autopilot cursor to open Agents, then focus the message box. Show each labeled step and the Stop control. Stay strictly within enabled, visible AI Brainstem UI controls. Do not send a message, operate another app, or use a hidden action. If the controls are unavailable, explain why and stop.",
+      "actions": [
+        "Send the prompt and watch the cursor move to the actual enabled controls before each action.",
+        "Try the same prompt again and press the visible Stop control before the next action.",
+        "If useful, switch twins manually to cancel pending UI replay; verify the selection yourself."
+      ],
+      "outcomes": [
+        "Visible cursor steps correspond to real Agents and message-box controls, or the app reports an unavailable control.",
+        "Stop or a manual switch cancels pending replay; a cancelled action is not reported as completed."
+      ],
+      "boundary": "UI-only is a hard boundary: no hidden operations, arbitrary destinations, destructive capability removal, or extra authority. Not every visible control is in the allowlist. In multichat, only validated main-origin directives replay. Stop does not undo work already accepted by the app.",
+      "help": "Use the actual visible control yourself if it is available. If the cursor is missing or a step cannot be verified, mark the gate rather than treating a text claim as UI action."
+    },
+    {
+      "id": "clear-keeps-work",
+      "phase": 4,
+      "emoji": "🫧",
+      "title": "Clear chat, keep the work",
+      "label": "Clear is not erase",
+      "time": "3 min",
+      "context": "Open the Book Swap participant organization in Work",
+      "intro": "Clear hides the chat; durable workspace evidence, objectives, decisions, artifacts, and routines remain. First verify that your deliverable is saved. Then make the distinction visible.",
+      "prompt": "Before I use Clear, verify that our Book Swap plan, draft invitation, decisions, and remaining tasks are saved in this participant work organization. Show their actual evidence references and owners. If anything is only an unsaved draft, persist it through supported Work capabilities or report a blocker. Do not claim that Clear deletes durable work.",
+      "actions": [
+        "Open the correct team work, send the prompt, and wait for verified persistence.",
+        "Only after that confirmation, use the app’s visible Clear control.",
+        "Open Work again and inspect the same organization’s owners, tasks, and evidence."
+      ],
+      "outcomes": [
+        "The visible conversation is cleared while the same work organization and saved evidence remain.",
+        "Clear has not created a new team identity, removed tasks, or authorized a routine."
+      ],
+      "boundary": "Clear is not a privacy erase, workspace deletion, or reset of durable work. Native session records can also remain on the device. Never clear an unverified draft just because an assistant said it would remember.",
+      "help": "If persistence failed, stop before Clear. If you already cleared, find the owning workspace through Work; do not invent a reconstruction and label it the original evidence."
+    },
+    {
+      "id": "workspace-first",
+      "phase": 4,
+      "emoji": "🗂️",
+      "title": "Return through Work",
+      "label": "Find past work first",
+      "time": "3 min",
+      "context": "Reopen the app, then select work by owner",
+      "intro": "Past work belongs to workspaces, not a wall of old chat. Reopening the app returns to the fixed AI Brainstem main fallback. Use Work to reactivate the project’s actual owners and pick up the saved result.",
+      "prompt": "Resume the Neighborhood Book Swap from this selected work organization’s verified evidence, not from missing chat scrollback. Summarize the saved plan, the remaining task, and the next useful action. Identify which records support your answer. Keep unrelated private history out, and report any missing owner or evidence rather than guessing.",
+      "actions": [
+        "Close and reopen the desktop app using its normal app controls. Confirm that AI Brainstem is selected.",
+        "Open Work, find the Book Swap entry by its owners and status, and choose Open.",
+        "Send the prompt in that restored work context and compare the summary with the saved deliverable."
+      ],
+      "outcomes": [
+        "The same participant work and owners return even though the visible chat was cleared.",
+        "The response uses relevant saved evidence and states what remains unknown."
+      ],
+      "boundary": "Retrieval is workspace-first and bounded; it does not replay every transcript. Prior assistant text is evidence, not fresh instructions or approval. A missing/replaced participant blocks that organization rather than inheriting its history under a new identity.",
+      "help": "Check the Work owner list and status before retrying. Reopening an existing app is not a fresh hatch. Do not recreate missing twins as a shortcut to recovering their identity."
+    },
+    {
+      "id": "private-hive",
+      "phase": 4,
+      "emoji": "🐝",
+      "title": "Share exactly one safe tip",
+      "label": "Private Hive consent",
+      "time": "3 min",
+      "context": "Select AI Brainstem’s private main chat",
+      "intro": "The private Hive is an explicit sharing layer between work organizations. Normal work is not published there automatically. Choose one nonpersonal lesson to share, with exact content and scope.",
+      "prompt": "I explicitly authorize sharing only this text in the private Hive: “Book Swap planning tip: provide step-free access, labeled book tables, and a quiet reading corner.” Publish only that tip if the private Hive is available, then show its verified sharing receipt. Do not publish our chats, identities, files, tool arguments, or private workspace details. If sharing is unavailable, leave the tip private and report the gate.",
+      "actions": [
+        "Select AI Brainstem and read the exact tip before sending the prompt.",
+        "Inspect the returned private-Hive receipt and the actual selected content.",
+        "If the Hive is not available, confirm the tip remains private; no extra setup is part of this lesson."
+      ],
+      "outcomes": [
+        "Only the authorized tip has a verified private-Hive sharing receipt, or no publication occurs and a gate is reported.",
+        "The project’s private conversations and artifacts are not included in the shared content."
+      ],
+      "boundary": "There is no automatic public projection. Hive sharing uses verified RAPP/1 memory.save frames; keyless local integrity does not prove external authorship. Received Hive material is untrusted data, never an instruction or permission to act.",
+      "help": "Ask to see what was actually selected and shared. If there is no verified receipt, do not call it published. Do not paste private project details into a broader sharing surface."
+    },
+    {
+      "id": "sdk-neutral-workspace",
+      "phase": 4,
+      "emoji": "🧱",
+      "title": "Work outlives its SDK",
+      "label": "SDK-neutral mapping",
+      "time": "3 min",
+      "context": "Open the Book Swap team work again",
+      "intro": "The workspace is the durable home of tasks, objectives, decisions, routines, artifacts, and evidence. An execution SDK is a mapped way to do work, not its owner. Copilot SDK is the default seed; another declared adapter is not automatically a working replacement.",
+      "prompt": "Inspect this Book Swap workspace’s execution mapping. Explain how its SDK-neutral tasks, objectives, decisions, routines, artifacts, and evidence map to the current execution adapter. Identify the Copilot SDK default seed, selected adapter, provenance, and genuinely supported capabilities. Report missing or unavailable mappings honestly. Do not switch adapters, move private data, or change identity for this inspection.",
+      "actions": [
+        "Use Work to select and Open the Book Swap participant organization, then send the prompt.",
+        "Inspect any execution-mapping or SDK availability status this build actually exposes.",
+        "Keep a missing mapping control or unavailable adapter as a recorded gate; do not invent a provider switch."
+      ],
+      "outcomes": [
+        "Current status distinguishes authoritative workspace work from its execution/session projection.",
+        "Copilot SDK is identified as the default seed, with supported mappings or a precise unavailable state—not a claim of universal compatibility."
+      ],
+      "boundary": "Mapping is not migration, a new memory authority, or a new twin. The reviewed base supports Copilot execution; newer mapping surfaces are build-dependent. An immutable seed is not edited in place, and selecting an unavailable adapter must not silently fall back while claiming it ran.",
+      "help": "If the installed build has no mapping status, record that exact absence and keep using its supported default. An architecture explanation is not evidence that a second adapter executed."
+    },
+    {
+      "id": "sdk-sessions-tool-search",
+      "phase": 5,
+      "emoji": "♾️",
+      "title": "Long sessions, bounded context",
+      "label": "Sessions & tool search",
+      "time": "4 min",
+      "context": "Stay in the Book Swap team work",
+      "intro": "Infinite sessions can compact context while durable decisions stay in Work. Native tool search can discover deferred capabilities without exposing everything at once. Neither feature means unlimited memory, cost, permissions, or automatic recovery.",
+      "prompt": "Inspect the Book Swap’s current SDK session status. Show whether infinite sessions and native tool search are supported, the current compaction settings, and any compaction evidence actually observed. Explain which loaded capabilities are available without calling removed practice helpers. Keep important decisions in Work. Do not simulate compaction or resume pending effects to demonstrate a feature.",
+      "actions": [
+        "Open Work → SDK availability and send the prompt.",
+        "Inspect model, reasoning, summary, and context choices if shown; leave them unchanged for this inspection.",
+        "Look for actual session evidence. An enabled setting without an observed event should be labelled “not yet observed.”"
+      ],
+      "outcomes": [
+        "The reply and Work status distinguish enabled settings, native availability, and actual observed events.",
+        "Removed tools remain unavailable; native search does not bypass permissions or recreate them."
+      ],
+      "boundary": "The documented adapter defaults to background/buffer compaction thresholds 0.80/0.95 and defers eligible tools above a threshold of 20; live behavior needs evidence. Protected work, Hive, memory, safety, and semantic helpers are never deferred. Pending-work continuation is off by default and requires exact owner approval and one-use recovery correlation, not a casual request to continue.",
+      "help": "Do not fill a conversation artificially to force compaction. If the runtime cannot report native search or compaction, record the gate or unobserved state without claiming a successful live test."
+    },
+    {
+      "id": "approvals-limits",
+      "phase": 5,
+      "emoji": "🛑",
+      "title": "Keep approval with the owner",
+      "label": "Approvals & limits",
+      "time": "4 min",
+      "context": "Inspect the Book Swap work settings",
+      "intro": "Approval and limits belong to the workspace owner. A proposed plan cannot approve itself. The Work panel prepares visible settings messages; preparing one does not send it or authorize a larger budget.",
+      "prompt": "Show this Book Swap organization’s pending approvals, current AI-credit cap, and budget blockers. Explain the difference between a proposed decision and an explicitly approved one. Prepare a bounded next-step plan only. Do not approve a request for me, enable spending, raise a limit, or resume an exhausted session. If a request needs input, identify the exact recorded request and the supported visible review path.",
+      "actions": [
+        "Open Work and inspect Review tasks / approvals and Model & approved budget where available.",
+        "Send the conversational prompt. This quest does not require approving any spend.",
+        "If you independently choose a cap through the visible form, Put settings in chat only prepares a message. Review it before sending; do not alter unfamiliar structured content."
+      ],
+      "outcomes": [
+        "The panel shows an unapproved cap, your existing explicit cap, or a real unavailable state—not unlimited authorization.",
+        "Unknown requests remain pending or declined. No assistant message grants itself permission."
+      ],
+      "boundary": "Native session limits require a positive explicit AI-credit budget. Exhaustion cancels and records an approval task; it never adds credits automatically. Exact one-use approvals are required for supported input forms; unknown forms are declined. Limits are experimental authorization bounds, not a monetary or provider billing guarantee.",
+      "help": "If the visible UI cannot safely express an approval, leave it pending. Never treat an assistant’s drafted approval or a general “looks good” as an exact one-use authorization."
+    },
+    {
+      "id": "autonomous-wake-routines",
+      "phase": 5,
+      "emoji": "⏰",
+      "title": "A routine needs real bounds",
+      "label": "Wake & routines",
+      "time": "4 min",
+      "context": "Keep the Book Swap routine disabled for this exercise",
+      "intro": "After-turn reconciliation organizes explicit work without a model heartbeat. Timed autonomous wake is different: it needs a deliberately enabled routine, a running app host, and explicit limits. Inspect both without granting unattended work.",
+      "prompt": "Propose a Book Swap review routine that checks only our saved draft, with no external effects. Keep it disabled. Explain the interval, occurrence count, per-run credit ceiling, total credit ceiling, and workspace budget approval that would be required. Show our current awake/asleep status, enabled routines, and actual wake evidence if any. Distinguish the protected after-turn reconcile routine from a timed model wake. Do not enable either new autonomy or spending from this message.",
+      "actions": [
+        "Send the prompt and inspect Work’s awake/asleep, routine, task, approval, and usage status.",
+        "Check that the proposed timed routine is still disabled. The reviewed compact panel shows status but does not provide a complete routine-approval form.",
+        "If an independently authorized routine already exists, inspect its recorded occurrence and outcome; otherwise record that no timed wake has occurred."
+      ],
+      "outcomes": [
+        "A proposed routine is visibly distinct from an enabled, bounded routine.",
+        "A real wake has an occurrence/result or gate in work evidence. Quiet or asleep status is not fabricated activity."
+      ],
+      "boundary": "Timed routines are off until explicit protected configuration approves bounded occurrences and both credit ceilings. They run only while the app host is running, not after Quit. Missed intervals do not cause a catch-up burst; ambiguous interrupted effects are not automatically replayed. Missing approval UI is a gate, not permission to improvise a schedule.",
+      "help": "Keep routines off if the installed UI cannot express all bounds. The default after-turn reconcile process can still organize evidence and become quiet without repeated model calls."
+    },
+    {
+      "id": "usage-files-citations",
+      "phase": 5,
+      "emoji": "🔎",
+      "title": "Inspect usage & real evidence",
+      "label": "Usage, files & citations",
+      "time": "4 min",
+      "context": "Inspect the Book Swap’s saved draft work",
+      "intro": "Use native observations, not guessed metrics. SDK events, file tracking, and citations are retained as private evidence in the same work organization. Read-only changes are not permission to undo work.",
+      "prompt": "Show the actual usage and evidence for our latest saved Book Swap draft. Separate observed token or AIU values from unknown values, and do not convert credits to money or add overlapping cumulative counters. Show recorded file-tracking and session-diff evidence if available, labelling any fallback as a fallback. Cite only real sources attached to the correct response. Do not invent a file change, citation, or rewind.",
+      "actions": [
+        "Send the prompt, then inspect Work’s usage line and Evidence / changes preview.",
+        "Look for source citations beneath the correct participant’s bubble when the provider supplies them.",
+        "Compare a recorded artifact or read-only diff with the actual deliverable; leave missing measurements as unknown."
+      ],
+      "outcomes": [
+        "Usage is observed or explicitly unknown, and a fallback is not labelled a native session diff.",
+        "Citations and file-change evidence exist only when supplied and validated; no unsupported rewind runs."
+      ],
+      "boundary": "File tracking starts on new native sessions; it cannot retroactively capture an old session. Recorded diffs are read-only; point previews require the same active session and can be gated. Rewind execution is unavailable. SDK session-store indexing and memory are off, embeddings are in memory, and telemetry is disabled; native transcripts, compaction records, and file captures may still persist locally, subordinate to Work and excluded from portable work backups.",
+      "help": "Provider-dependent citations may be empty, and missing usage is not zero. An evidence error or unavailable preview must remain visible, not be filled with a plausible estimate."
+    },
+    {
+      "id": "native-agents-canvases",
+      "phase": 6,
+      "emoji": "🎭",
+      "title": "Roles are not new twins",
+      "label": "Native roles & canvases",
+      "time": "3 min",
+      "context": "Stay in the Book Swap organization",
+      "intro": "Native SDK agents can be temporary roles projected from current work. They do not mint persistent child twins. A declared canvas feature is also not a rendered canvas: inspect the actual availability state.",
+      "prompt": "Explain any native SDK agents configured for this Book Swap organization as temporary roles, not new twins. Show verified role names and allowed loaded tools if native inspection is supported; otherwise report none or a gate. Check canvases and MCP Apps availability honestly. Do not pretend a live canvas exists. Give me a plain-text volunteer-plan outline instead if no safe renderer is available.",
+      "actions": [
+        "Send the prompt and inspect Work → SDK availability.",
+        "Compare any native role result with the persistent twin selector; Scout and Planner should not be silently copied.",
+        "Use the plain-text outline rather than searching for a canvas control that this build does not provide."
+      ],
+      "outcomes": [
+        "Native roles are verified against current allowed tools, or their absence/introspection gate is explicit.",
+        "Canvases show unavailable: no-renderer and MCP Apps show unavailable: no-safe-renderer in the reviewed adapter; no pretend renderer is presented."
+      ],
+      "boundary": "Native roles are ephemeral, organization-scoped, and limited to currently loaded allowed tools. Retained stale definitions or unavailable role inspection gate execution. Flags alone do not enable canvases or safe App rendering. Telemetry opt-in is unavailable in the reviewed shared-client lifecycle.",
+      "help": "Mark a renderer or role gate as a gate. Do not install an unrelated viewer or loosen tool permissions to make the lesson look successful."
+    },
+    {
+      "id": "lazy-workspace-graph",
+      "phase": 6,
+      "emoji": "🔗",
+      "title": "Connect only what helps",
+      "label": "A useful little graph",
+      "time": "3 min",
+      "context": "Ask one relationship question in Book Swap work",
+      "intro": "A graph is useful when a real relationship answers a question. Work can derive a small relationship facet from explicit typed local links. It does not need a separate graph service, a new memory store, or a graph screen.",
+      "prompt": "Which unfinished Book Swap task, if any, blocks finalizing our draft invitation? Use existing workspace-native links between the task, objective, decision, and saved evidence. If the relationship is missing but supported by evidence, add only the useful explicit local links. If no blocker is documented, say so and keep the work flat. Do not invent dependencies or build a separate graph.",
+      "actions": [
+        "Send the prompt within the Book Swap work organization.",
+        "Inspect the referenced task, objective, and artifact/evidence in the work lists.",
+        "Confirm that each relationship answers this project question rather than connecting unrelated private work."
+      ],
+      "outcomes": [
+        "The answer cites actual typed local links or honestly states that no useful relationship is available.",
+        "Flat work stays flat until a real link is useful; no separate graph UI is promised."
+      ],
+      "boundary": "The lazy graph is a derived workspace-native facet, not another authority. No relationship projection is needed without links; removing the last link removes that facet. Evidence must support an edge, and a link never grants access to another owner’s private content.",
+      "help": "A simple task list is a valid result. If the build cannot expose or persist typed links, record that gate without drawing an imaginary dependency graph."
+    },
+    {
+      "id": "successor-generations",
+      "phase": 6,
+      "emoji": "🌱",
+      "title": "Improve without rewriting history",
+      "label": "Immutable successors",
+      "time": "4 min",
+      "context": "Record a Book Swap retrospective in Work",
+      "intro": "Antifragile adaptation means learning from a real miss and testing a better successor—not quietly rewriting yesterday’s evidence. The immutable seed and verified history remain pinned. Ordinary task updates are not a new generation of the underlying template.",
+      "prompt": "Record a Book Swap retrospective: our early draft did not explicitly plan a quiet reading corner. Link the actual draft evidence, check whether that miss is real, and propose a review improvement for a successor generation. Keep the current immutable seed, identity, genesis, and prior evidence unchanged. Show any supported successor preview and approval state with lineage; if promotion is unavailable, save a proposed decision and its gate. Do not claim a new generation was applied.",
+      "actions": [
+        "Send the prompt and inspect the retrospective’s evidence and proposed decision in Work.",
+        "Check whether the installed build actually exposes a verified successor mechanism; do not infer one from an edited task.",
+        "Leave the proposal unapplied unless a separate supported, explicitly approved successor flow exists."
+      ],
+      "outcomes": [
+        "A genuine failure—or an honest finding that it was not a failure—is recorded with evidence and a proposed improvement.",
+        "The established immutable seed and earlier history stay unchanged. Unsupported successor promotion is recorded as gated."
+      ],
+      "boundary": "Immutable successor generations require explicit supported lineage and approval; the reviewed base does not promise an automatic template-promotion flow. A changing projection is not a rewritten seed. Evidence cannot approve its own adaptation. Destructive rewind, identity resets, and fabricated ancestry are not recovery.",
+      "help": "If the early draft already included the quiet corner, record that fact instead of manufacturing a failure. A proposed improvement is useful work even when successor creation remains gated."
+    },
+    {
+      "id": "backup-fresh-hatch",
+      "phase": 6,
+      "emoji": "🥚",
+      "title": "Export honestly, hatch lawfully",
+      "label": "Backup & fresh lineage",
+      "time": "5 min",
+      "context": "Select only the Book Swap participant work for export",
+      "intro": "Finish with a canonical RAPP/1 backup, not a renamed transcript. A private twin exports an organism egg; participant and whole-root scopes export neighborhoods. Choose the participant scope so unrelated private work stays out, then verify and preview without executing it.",
+      "prompt": "Create one canonical RAPP/1 backup of this selected Book Swap participant organization, then verify and read-only preview exactly the saved egg returned. Show its verified address, included owners, evidence and artifacts, and exclusions. Refuse missing owner closure or integrity failures. Explain why a lawful fresh hatch needs a newly minted instance identity while preserving the egg artifact identity and valid stream lineage. Do not restore, install, clone a live identity, or claim that an unavailable hatch succeeded.",
+      "actions": [
+        "In Work choose the Book Swap participant organization and Open it, then send the prompt.",
+        "Inspect the verified egg address and the read-only verification/preview result. Work’s Backup button is the visible alternative for creating the same scoped local export; it is not an automatic download.",
+        "To retain a copy outside the app, use the desktop settings’ Show files action and copy only the saved egg identified by the receipt to storage you approve. Leave it unmodified; do not run or import it as part of this lesson."
+      ],
+      "outcomes": [
+        "The saved canonical egg verifies and its preview includes the intended participant work and referenced owners, or a concrete integrity/closure gate blocks export.",
+        "Restore, install, and fresh hatch are explicitly unavailable in the reviewed adapter. A verified export is not labelled a tested restore."
+      ],
+      "boundary": "Seeds, verified frames, checkpoint pins, and referenced artifacts travel with the scoped backup. Credentials, native SDK sessions, unreferenced working files, and Hive broadcast history do not. A whole-root backup includes referenced private owners and is not a globally simultaneous snapshot. RAPP/1 §9.4 fresh-instance/stream-lineage support is not implemented here: never duplicate a live RAPPID or fabricate grown_from. Unsigned local/draft integrity is not authenticated §13 estate authority; the product interface is not strict §8 wire qualification.",
+      "help": "Keep the verified export and its scope record. Missing owners, changed artifacts, or failed preview must block success. Use Gate recorded for unavailable hatch; do not weaken identity checks to manufacture a recovery demonstration."
+    }
+  ]
+}
+</script>
+<script>
+'use strict';
+
+const QUEST = JSON.parse(document.getElementById('questData').textContent);
+const CHECKPOINTS = QUEST.checkpoints;
+const PHASES = QUEST.phases;
+const STORAGE_KEY = 'ai-brainstem-training-quest:v1';
+const OUTCOMES = { verified: 'Outcome verified', gated: 'Gate recorded' };
+let progress = emptyProgress();
+let persistenceWarning = '';
+let currentCheckpoint = -1;
+let panelReturnFocus = null;
+let badgeReturnFocus = null;
+
+function emptyProgress() {
+  return { version: 1, completed: {}, lastVisited: null, completedAt: null };
+}
+
+function normalizeProgress(value) {
+  const clean = emptyProgress();
+  if (!value || value.version !== 1 || typeof value.completed !== 'object' || !value.completed || Array.isArray(value.completed)) return clean;
+  for (const cp of CHECKPOINTS) {
+    if (Object.hasOwn(value.completed, cp.id) && typeof value.completed[cp.id] === 'string' && Object.hasOwn(OUTCOMES, value.completed[cp.id])) {
+      clean.completed[cp.id] = value.completed[cp.id];
+    }
+  }
+  if (CHECKPOINTS.some(cp => cp.id === value.lastVisited)) clean.lastVisited = value.lastVisited;
+  if (progressCounts(clean).reviewed === CHECKPOINTS.length && typeof value.completedAt === 'string' && Number.isFinite(Date.parse(value.completedAt))) {
+    clean.completedAt = value.completedAt;
+  }
+  return clean;
+}
+
+function readProgress() {
+  try {
+    const saved = window.localStorage.getItem(STORAGE_KEY);
+    return saved ? normalizeProgress(JSON.parse(saved)) : emptyProgress();
+  } catch {
+    persistenceWarning = 'Saved quest progress could not be read. You can continue for this visit; AI Brainstem work is separate and unchanged.';
+    return emptyProgress();
+  }
+}
+
+function saveProgress() {
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  } catch {
+    persistenceWarning = 'Browser storage is unavailable. Progress is kept for this visit only; AI Brainstem work is separate and unchanged.';
+  }
+  const notice = document.getElementById('storageNotice');
+  notice.textContent = persistenceWarning;
+  notice.hidden = !persistenceWarning;
+}
+
+function progressCounts(value) {
+  let verified = 0, gated = 0;
+  for (const cp of CHECKPOINTS) {
+    if (value.completed[cp.id] === 'verified') verified++;
+    if (value.completed[cp.id] === 'gated') gated++;
+  }
+  return { verified, gated, reviewed: verified + gated };
+}
+
+function withOutcome(value, id, outcome, now = new Date().toISOString()) {
+  const next = normalizeProgress(value);
+  if (!CHECKPOINTS.some(cp => cp.id === id) || typeof outcome !== 'string' || !Object.hasOwn(OUTCOMES, outcome)) return next;
+  if (next.completed[id] === outcome) delete next.completed[id];
+  else next.completed[id] = outcome;
+  next.lastVisited = id;
+  next.completedAt = progressCounts(next).reviewed === CHECKPOINTS.length ? (next.completedAt || now) : null;
+  return next;
+}
+
+function nextIndex() {
+  return CHECKPOINTS.findIndex(cp => !progress.completed[cp.id]);
+}
+
+function positionFor(index) {
+  const cp = CHECKPOINTS[index];
+  const phaseItems = CHECKPOINTS.filter(item => item.phase === cp.phase);
+  const offset = phaseItems.findIndex(item => item.id === cp.id);
+  const row = cp.phase % 2 ? offset : phaseItems.length - 1 - offset;
+  return {
+    x: (cp.phase - .5) * (100 / PHASES.length) + (offset % 2 ? 1.4 : -1.4),
+    y: 18 + row * (66 / Math.max(1, phaseItems.length - 1))
+  };
+}
+
+function element(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+}
+
+function checkpointButton(cp, index, mobile) {
+  const button = element('button', mobile ? 'm-item' : 'node');
+  button.type = 'button';
+  button.id = (mobile ? 'mobile-' : '') + cp.id;
+  button.dataset.checkpoint = String(index);
+  button.setAttribute('aria-haspopup', 'dialog');
+  button.setAttribute('aria-controls', 'checkpointPanel');
+  const icon = element('span', mobile ? 'm-node' : 'inner', cp.emoji);
+  icon.setAttribute('aria-hidden', 'true');
+  if (mobile) {
+    const text = element('span', 'm-text');
+    text.append(element('span', 'm-title', `${index + 1}. ${cp.title}`), element('span', 'm-state'));
+    const arrow = element('span', 'm-arrow', '→');
+    arrow.setAttribute('aria-hidden', 'true');
+    button.append(icon, text, arrow);
+  } else {
+    const pos = positionFor(index);
+    button.style.left = pos.x + '%';
+    button.style.top = pos.y + '%';
+    const ring = element('span', 'ring');
+    ring.setAttribute('aria-hidden', 'true');
+    const marker = element('span', 'state-icon', String(index + 1));
+    marker.setAttribute('aria-hidden', 'true');
+    button.append(ring, icon, element('span', 'label', cp.label), marker);
+    button.title = cp.title;
+  }
+  button.addEventListener('click', () => openCheckpoint(index));
+  button.addEventListener('keydown', event => {
+    let target = index;
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') target = Math.min(index + 1, CHECKPOINTS.length - 1);
+    else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') target = Math.max(index - 1, 0);
+    else if (event.key === 'Home') target = 0;
+    else if (event.key === 'End') target = CHECKPOINTS.length - 1;
+    else return;
+    event.preventDefault();
+    document.getElementById((mobile ? 'mobile-' : '') + CHECKPOINTS[target].id).focus();
+  });
+  return button;
+}
+
+function buildNavigation() {
+  const map = document.getElementById('questMap');
+  const mobile = document.getElementById('mobileList');
+  PHASES.forEach((phase, i) => {
+    const heading = element('h2', 'phase-label', `${i + 1} · ${phase}`);
+    heading.style.left = (i * 100 / PHASES.length) + '%';
+    map.append(heading);
+    if (i > 0) {
+      const divider = element('div', 'phase-divider');
+      divider.setAttribute('aria-hidden', 'true');
+      divider.style.left = (i * 100 / PHASES.length) + '%';
+      map.append(divider);
+    }
+    const section = element('section', 'm-phase');
+    const title = element('h2', '', `${i + 1} · ${phase}`);
+    title.id = `mobile-phase-${i + 1}`;
+    section.setAttribute('aria-labelledby', title.id);
+    const list = element('ol');
+    CHECKPOINTS.forEach((cp, index) => {
+      if (cp.phase !== i + 1) return;
+      map.append(checkpointButton(cp, index, false));
+      const item = element('li');
+      item.append(checkpointButton(cp, index, true));
+      list.append(item);
+    });
+    section.append(title, list);
+    mobile.append(section);
+  });
+}
+
+function renderPath() {
+  const svg = document.getElementById('pathSvg');
+  svg.replaceChildren();
+  for (let i = 0; i < CHECKPOINTS.length - 1; i++) {
+    const a = positionFor(i), b = positionFor(i + 1);
+    const ax = a.x * 12, ay = a.y * 5, bx = b.x * 12, by = b.y * 5;
+    const samePhase = CHECKPOINTS[i].phase === CHECKPOINTS[i + 1].phase;
+    const controls = samePhase ? `${ax},${(ay + by) / 2} ${bx},${(ay + by) / 2}` : `${(ax + bx) / 2},${ay} ${(ax + bx) / 2},${by}`;
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', `M${ax},${ay} C${controls} ${bx},${by}`);
+    const left = progress.completed[CHECKPOINTS[i].id], right = progress.completed[CHECKPOINTS[i + 1].id];
+    let status = '';
+    if (left && right) status = left === 'gated' || right === 'gated' ? 'gated' : 'verified';
+    else if (i === nextIndex() || i + 1 === nextIndex()) status = 'next';
+    path.setAttribute('class', 'route ' + status);
+    svg.append(path);
+  }
+}
+
+function updateView() {
+  const counts = progressCounts(progress), active = nextIndex();
+  document.getElementById('progressLabel').textContent = `${counts.reviewed} of ${CHECKPOINTS.length} reviewed`;
+  document.getElementById('progressDetail').textContent = `${counts.verified} verified · ${counts.gated} gated`;
+  const meter = document.getElementById('questProgress');
+  meter.setAttribute('aria-valuemax', String(CHECKPOINTS.length));
+  meter.setAttribute('aria-valuenow', String(counts.reviewed));
+  meter.setAttribute('aria-valuetext', `${counts.reviewed} of ${CHECKPOINTS.length} reviewed, ${counts.verified} verified, ${counts.gated} gated`);
+  document.getElementById('progressFill').style.width = (counts.reviewed / CHECKPOINTS.length * 100) + '%';
+  document.getElementById('continueQuest').textContent = active === -1 ? 'View completion badge' : counts.reviewed ? 'Continue quest →' : 'Start the quest →';
+  document.querySelectorAll('[data-checkpoint]').forEach(button => {
+    const index = Number(button.dataset.checkpoint), cp = CHECKPOINTS[index], outcome = progress.completed[cp.id];
+    button.classList.toggle('verified', outcome === 'verified');
+    button.classList.toggle('gated', outcome === 'gated');
+    button.classList.toggle('next', index === active);
+    if (index === active) button.setAttribute('aria-current', 'step');
+    else button.removeAttribute('aria-current');
+    const description = outcome ? OUTCOMES[outcome] : index === active ? 'Next checkpoint' : 'Not reviewed';
+    button.setAttribute('aria-label', `${index + 1}. ${cp.title}. ${description}.`);
+    const marker = button.querySelector('.state-icon');
+    if (marker) marker.textContent = outcome === 'verified' ? '✓' : outcome === 'gated' ? '!' : String(index + 1);
+    const mobileStatus = button.querySelector('.m-state');
+    if (mobileStatus) mobileStatus.textContent = `${cp.time} · ${description}`;
+  });
+  renderPath();
+  updateOutcomeButtons();
+}
+
+function fillList(id, items) {
+  document.getElementById(id).replaceChildren(...items.map(text => element('li', '', text)));
+}
+
+function openCheckpoint(index) {
+  if (!Number.isInteger(index) || !CHECKPOINTS[index]) return;
+  const panel = document.getElementById('checkpointPanel'), cp = CHECKPOINTS[index];
+  if (!panel.open) panelReturnFocus = document.activeElement;
+  currentCheckpoint = index;
+  progress.lastVisited = cp.id;
+  saveProgress();
+  document.getElementById('panelEmoji').textContent = cp.emoji;
+  document.getElementById('panelMeta').textContent = `${index + 1} of ${CHECKPOINTS.length} · ${PHASES[cp.phase - 1]} · ${cp.time}`;
+  document.getElementById('panelTitle').textContent = cp.title;
+  document.getElementById('panelContext').textContent = cp.context;
+  document.getElementById('panelIntro').textContent = cp.intro;
+  document.getElementById('promptText').value = cp.prompt;
+  document.getElementById('copyPrompt').textContent = 'Copy prompt';
+  document.getElementById('copyStatus').textContent = 'Paste into AI Brainstem when the visible steps below say to send it.';
+  fillList('panelActions', cp.actions);
+  fillList('panelOutcomes', cp.outcomes);
+  document.getElementById('panelBoundary').textContent = cp.boundary;
+  document.getElementById('panelHelpText').textContent = cp.help;
+  document.getElementById('panelHelp').open = false;
+  updateOutcomeButtons();
+  document.documentElement.classList.add('modal-open');
+  if (!panel.open) panel.showModal();
+  document.getElementById('panelTitle').focus();
+  document.getElementById('panelBody').scrollTop = 0;
+}
+
+function updateOutcomeButtons() {
+  if (currentCheckpoint < 0) return;
+  const cp = CHECKPOINTS[currentCheckpoint];
+  document.querySelectorAll('[data-outcome]').forEach(button => {
+    button.setAttribute('aria-pressed', String(progress.completed[cp.id] === button.dataset.outcome));
+  });
+  document.getElementById('previousCheckpoint').disabled = currentCheckpoint === 0;
+  const next = document.getElementById('nextCheckpoint');
+  const last = currentCheckpoint === CHECKPOINTS.length - 1;
+  next.disabled = last && nextIndex() !== -1;
+  next.textContent = last ? 'View badge' : 'Next →';
+}
+
+function announce(message) {
+  document.getElementById('announcer').textContent = message;
+}
+
+async function writeClipboard(text) {
+  try {
+    if (!navigator.clipboard || typeof navigator.clipboard.writeText !== 'function') return false;
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function copyCurrentPrompt() {
+  if (currentCheckpoint < 0) return;
+  const index = currentCheckpoint;
+  const copied = await writeClipboard(CHECKPOINTS[index].prompt);
+  if (currentCheckpoint !== index || !document.getElementById('checkpointPanel').open) return;
+  const message = copied ? 'Copied. Paste into AI Brainstem.' : 'Copy is unavailable here. The prompt is selected; use your browser’s Copy action, then paste into AI Brainstem.';
+  if (!copied) {
+    const text = document.getElementById('promptText');
+    text.focus();
+    text.select();
+  }
+  document.getElementById('copyPrompt').textContent = copied ? '✓ Copied' : 'Select & copy';
+  document.getElementById('copyStatus').textContent = message;
+  announce(message);
+}
+
+function recordOutcome(outcome) {
+  if (currentCheckpoint < 0) return;
+  const wasComplete = nextIndex() === -1, cp = CHECKPOINTS[currentCheckpoint];
+  progress = withOutcome(progress, cp.id, outcome);
+  saveProgress();
+  updateView();
+  announce(`${cp.title}: ${OUTCOMES[progress.completed[cp.id]] || 'outcome removed'}.`);
+  if (!wasComplete && nextIndex() === -1) showCompletion(true);
+}
+
+function restoreFocus(target) {
+  if (document.querySelector('dialog[open]')) return;
+  document.documentElement.classList.remove('modal-open');
+  if (target && target.isConnected && target.getClientRects().length) target.focus();
+  else document.getElementById('continueQuest').focus();
+}
+
+function closeOnBackdrop(dialog, event) {
+  if (event.target !== dialog) return;
+  const rect = dialog.getBoundingClientRect();
+  if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close();
+}
+
+function renderBadge() {
+  const canvas = document.getElementById('badgeCanvas');
+  const counts = progressCounts(progress), context = canvas.getContext('2d');
+  const summary = `${counts.reviewed} checkpoints reviewed: ${counts.verified} outcomes verified, ${counts.gated} gates recorded.`;
+  canvas.setAttribute('aria-label', 'AI Brainstem Training Quest. ' + summary);
+  if (!context) {
+    document.getElementById('downloadBadge').disabled = true;
+    document.getElementById('badgeStatus').textContent = 'Image badges are unavailable in this browser. You can still share the text summary.';
+    return;
+  }
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  const background = context.createLinearGradient(0, 0, 720, 380);
+  background.addColorStop(0, '#0d1117');
+  background.addColorStop(1, '#1b2938');
+  context.fillStyle = background;
+  context.fillRect(0, 0, 720, 380);
+  const accent = context.createLinearGradient(0, 0, 720, 0);
+  accent.addColorStop(0, '#58a6ff');
+  accent.addColorStop(1, '#3fb950');
+  context.fillStyle = accent;
+  context.fillRect(0, 0, 720, 5);
+  context.textAlign = 'center';
+  context.fillStyle = '#e6edf3';
+  context.font = '52px system-ui, sans-serif';
+  context.fillText('✦', 360, 78);
+  context.font = 'bold 38px system-ui, sans-serif';
+  context.fillText('AI Brainstem', 360, 132);
+  context.fillStyle = '#7ee787';
+  context.font = '24px system-ui, sans-serif';
+  context.fillText('Training Quest reviewed', 360, 179);
+  context.fillStyle = '#e6edf3';
+  context.font = '18px system-ui, sans-serif';
+  context.fillText(`${counts.reviewed} checkpoints · ${PHASES.length} chapters`, 360, 220);
+  context.fillStyle = '#c9d1d9';
+  context.font = '17px system-ui, sans-serif';
+  context.fillText(`${counts.verified} outcomes verified · ${counts.gated} gates recorded`, 360, 255);
+  const date = new Date(progress.completedAt || QUEST.reviewed).toLocaleDateString('en', { year: 'numeric', month: 'long', day: 'numeric' });
+  context.font = '14px system-ui, sans-serif';
+  context.fillText(`${date} · Quest v${QUEST.version}`, 360, 301);
+  context.fillStyle = '#8b949e';
+  context.fillText('One team. Lasting work. Honest limits.', 360, 336);
+}
+
+function celebrate() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const colors = ['#0969da', '#1a7f37', '#bf8700', '#bc8cff', '#f778ba'];
+  for (let i = 0; i < 35; i++) {
+    const piece = element('span', 'confetti-piece');
+    piece.setAttribute('aria-hidden', 'true');
+    piece.style.left = Math.random() * 100 + 'vw';
+    piece.style.background = colors[i % colors.length];
+    piece.style.animationDelay = Math.random() * .25 + 's';
+    piece.style.setProperty('--drift', (Math.random() - .5) * 180 + 'px');
+    document.body.append(piece);
+    piece.addEventListener('animationend', () => piece.remove(), { once: true });
+    setTimeout(() => piece.remove(), 3500);
+  }
+}
+
+function showCompletion(withCelebration = false) {
+  if (nextIndex() !== -1) return;
+  const panel = document.getElementById('checkpointPanel');
+  if (panel.open) panel.close();
+  const counts = progressCounts(progress), dialog = document.getElementById('completionDialog');
+  badgeReturnFocus = document.getElementById('continueQuest');
+  document.getElementById('completionStats').textContent = `${counts.reviewed} checkpoints reviewed · ${counts.verified} outcomes verified · ${counts.gated} gates recorded. Gates are lessons in supported limits, not claims of execution.`;
+  document.getElementById('badgeStatus').textContent = '';
+  document.getElementById('shareFallback').hidden = true;
+  renderBadge();
+  document.documentElement.classList.add('modal-open');
+  if (!dialog.open) dialog.showModal();
+  document.getElementById('completionTitle').focus();
+  if (withCelebration) celebrate();
+}
+
+function shareSummary() {
+  const counts = progressCounts(progress);
+  let text = `I reviewed the AI Brainstem Training Quest: ${counts.reviewed} checkpoints, ${counts.verified} outcomes verified and ${counts.gated} gates recorded. One team, lasting work, honest limits.`;
+  const url = new URL(window.location.href);
+  if (url.protocol === 'https:' || url.protocol === 'http:') {
+    url.hash = '';
+    url.search = '';
+    text += '\n' + url.href;
+  }
+  return text;
+}
+
+async function shareBadge() {
+  const text = shareSummary();
+  if (typeof navigator.share === 'function') {
+    try {
+      await navigator.share({ title: 'AI Brainstem — Training Quest', text });
+      document.getElementById('badgeStatus').textContent = 'Summary shared.';
+      return;
+    } catch (error) {
+      if (error && error.name === 'AbortError') {
+        document.getElementById('badgeStatus').textContent = 'Sharing cancelled. Nothing else was sent.';
+        return;
+      }
+    }
+  }
+  if (await writeClipboard(text)) {
+    document.getElementById('badgeStatus').textContent = 'Summary copied. Share it wherever you choose.';
+  } else {
+    document.getElementById('shareFallback').hidden = false;
+    const field = document.getElementById('shareText');
+    field.value = text;
+    field.focus();
+    field.select();
+    document.getElementById('badgeStatus').textContent = 'Sharing is unavailable here. Select and copy the summary below.';
+  }
+}
+
+function downloadBadge() {
+  try {
+    const link = element('a');
+    link.download = 'ai-brainstem-quest-reviewed.png';
+    link.href = document.getElementById('badgeCanvas').toDataURL('image/png');
+    document.body.append(link);
+    link.click();
+    link.remove();
+  } catch {
+    document.getElementById('badgeStatus').textContent = 'The image could not be downloaded. Use Share summary instead.';
+  }
+}
+
+function resetProgress() {
+  if (!window.confirm('Reset only this quest’s saved progress? Your AI Brainstem work and the historical quest are not changed.')) return;
+  progress = emptyProgress();
+  saveProgress();
+  updateView();
+  document.querySelectorAll('dialog[open]').forEach(dialog => dialog.close());
+  announce('AI Brainstem quest progress reset. App work and other quests are unchanged.');
+}
+
+function openLinkedCheckpoint() {
+  let hash = '';
+  try { hash = decodeURIComponent(window.location.hash.slice(1)); } catch { /* Ignore malformed incoming fragments. */ }
+  const linked = CHECKPOINTS.findIndex(cp => cp.id === hash);
+  if (linked >= 0) openCheckpoint(linked);
+}
+
+function initialize() {
+  progress = readProgress();
+  buildNavigation();
+  updateView();
+  const notice = document.getElementById('storageNotice');
+  notice.textContent = persistenceWarning;
+  notice.hidden = !persistenceWarning;
+  const panel = document.getElementById('checkpointPanel'), completion = document.getElementById('completionDialog');
+  document.getElementById('continueQuest').addEventListener('click', () => nextIndex() === -1 ? showCompletion() : openCheckpoint(nextIndex()));
+  document.getElementById('resetProgress').addEventListener('click', resetProgress);
+  document.getElementById('copyPrompt').addEventListener('click', copyCurrentPrompt);
+  document.getElementById('closePanel').addEventListener('click', () => panel.close());
+  document.getElementById('closeCompletion').addEventListener('click', () => completion.close());
+  panel.addEventListener('close', () => restoreFocus(panelReturnFocus));
+  completion.addEventListener('close', () => restoreFocus(badgeReturnFocus));
+  panel.addEventListener('click', event => closeOnBackdrop(panel, event));
+  completion.addEventListener('click', event => closeOnBackdrop(completion, event));
+  document.querySelectorAll('[data-outcome]').forEach(button => button.addEventListener('click', () => recordOutcome(button.dataset.outcome)));
+  document.getElementById('previousCheckpoint').addEventListener('click', () => openCheckpoint(currentCheckpoint - 1));
+  document.getElementById('nextCheckpoint').addEventListener('click', () => currentCheckpoint === CHECKPOINTS.length - 1 ? showCompletion() : openCheckpoint(currentCheckpoint + 1));
+  document.getElementById('downloadBadge').addEventListener('click', downloadBadge);
+  document.getElementById('shareBadge').addEventListener('click', shareBadge);
+  window.addEventListener('storage', event => {
+    if (event.key !== STORAGE_KEY && event.key !== null) return;
+    progress = readProgress();
+    updateView();
+    if (completion.open) {
+      if (nextIndex() === -1) showCompletion();
+      else completion.close();
+    }
+  });
+  window.addEventListener('hashchange', openLinkedCheckpoint);
+  openLinkedCheckpoint();
+}
+
+initialize();
+</script>
+</body>
+</html>
